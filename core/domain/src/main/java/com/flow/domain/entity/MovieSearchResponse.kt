@@ -1,7 +1,5 @@
-package com.flow.data.model
+package com.flow.domain.entity
 
-
-import com.google.gson.annotations.SerializedName
 
 data class MovieSearchResponse(
     //@SerializedName("display")

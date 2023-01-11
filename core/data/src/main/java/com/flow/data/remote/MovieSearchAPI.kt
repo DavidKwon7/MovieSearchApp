@@ -2,7 +2,7 @@ package com.flow.data.remote
 
 import com.flow.common.Constants.Companion.NAVER_CLIENT_ID
 import com.flow.common.Constants.Companion.NAVER_CLIENT_PW
-import com.flow.data.model.MovieSearchResponse
+import com.flow.domain.entity.MovieSearchResponse
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query

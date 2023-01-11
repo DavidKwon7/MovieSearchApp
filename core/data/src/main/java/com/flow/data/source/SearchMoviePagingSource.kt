@@ -3,8 +3,8 @@ package com.flow.data.source
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.flow.common.Constants.Companion.PAGING_START_PAGE
-import com.flow.data.model.Item
 import com.flow.data.remote.MovieSearchAPI
+import com.flow.domain.entity.Item
 import retrofit2.HttpException
 import java.io.IOException
 

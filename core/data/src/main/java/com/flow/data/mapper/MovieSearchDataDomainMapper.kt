@@ -1,8 +1,8 @@
 package com.flow.data.mapper
 
 import com.flow.common.Mapper
-import com.flow.data.model.Item
-import com.flow.domain.entity.MovieSearchEntityModel
+import com.flow.domain.entity.Item
+import com.flow.data.model.MovieSearchEntityModel
 import javax.inject.Inject
 
 class MovieSearchDataDomainMapper @Inject constructor() :

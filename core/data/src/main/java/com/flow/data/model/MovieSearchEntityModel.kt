@@ -1,4 +1,4 @@
-package com.flow.domain.entity
+package com.flow.data.model
 
 data class MovieSearchEntityModel(
     val image: String?,
