@@ -14,3 +14,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "MovieSearchApp"
 include (":app")
+include(":core")
