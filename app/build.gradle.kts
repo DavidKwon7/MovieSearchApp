@@ -56,6 +56,9 @@ android {
 
 dependencies {
 
+    implementation(project(":core:common"))
+    implementation(project(":core:data"))
+
     implementation(Dependency.KTX.CORE)
     implementation(Dependency.AndroidX.APP_COMPAT)
     implementation(Dependency.AndroidX.MATERIAL)
