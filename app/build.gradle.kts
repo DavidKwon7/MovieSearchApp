@@ -40,6 +40,9 @@ android {
                     "proguard-rules.pro"
             )
         }
+        packagingOptions {
+            resources.excludes.add("META-INF/gradle/incremental.annotation.processors")
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -58,6 +61,7 @@ dependencies {
 
     implementation(project(":core:common"))
     implementation(project(":core:data"))
+    implementation(project(":core:domain"))
 
     implementation(Dependency.KTX.CORE)
     implementation(Dependency.AndroidX.APP_COMPAT)
