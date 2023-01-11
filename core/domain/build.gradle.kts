@@ -45,4 +45,6 @@ dependencies {
 
     implementation(Dependency.Hilt.HILT)
     implementation(Dependency.Hilt.HILT_KAPT)
+
+    implementation(Dependency.Paging.PAGING)
 }

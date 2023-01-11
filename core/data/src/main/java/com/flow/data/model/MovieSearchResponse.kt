@@ -4,14 +4,14 @@ package com.flow.data.model
 import com.google.gson.annotations.SerializedName
 
 data class MovieSearchResponse(
-    @SerializedName("display")
+    //@SerializedName("display")
     val display: Int?,
-    @SerializedName("items")
-    val items: List<Item?>?,
-    @SerializedName("lastBuildDate")
+    //@SerializedName("items")
+    val items: List<Item>,
+    //@SerializedName("lastBuildDate")
     val lastBuildDate: String?,
-    @SerializedName("start")
+    //@SerializedName("start")
     val start: Int?,
-    @SerializedName("total")
+    //@SerializedName("total")
     val total: Int?
 )

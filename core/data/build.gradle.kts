@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -36,6 +37,7 @@ android {
 dependencies {
 
     implementation(project(":core:common"))
+    implementation(project(":core:domain"))
 
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.appcompat:appcompat:1.5.1")
@@ -44,7 +46,12 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.4")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
 
+    implementation(Dependency.Hilt.HILT)
+
+
     implementation(Dependency.Remote.RETROFIT)
     implementation(Dependency.Remote.CONVERTER)
     implementation(Dependency.Remote.HTTP)
+
+    implementation(Dependency.Paging.PAGING)
 }
