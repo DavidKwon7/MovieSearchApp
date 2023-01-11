@@ -7,15 +7,15 @@ data class Item(
     //@SerializedName("actor") val actor: String?,
     //@SerializedName("director") val director: String?,
     //@SerializedName("image")
-    val image: String,
+    val image: String?,
     //@SerializedName("link")
-    val link: String,
+    val link: String?,
     //@SerializedName("pubDate")
-    val pubDate: String,
+    val pubDate: String?,
     //@SerializedName("subtitle")
-    val subtitle: String,
+    //val subtitle: String,
     //@SerializedName("title")
-    val title: String,
+    val title: String?,
     //@SerializedName("userRating")
-    val userRating: String
+    val userRating: String?
 )
