@@ -16,3 +16,4 @@ rootProject.name = "MovieSearchApp"
 include (":app")
 include(":core")
 include(":feature")
+include(":core:data")
