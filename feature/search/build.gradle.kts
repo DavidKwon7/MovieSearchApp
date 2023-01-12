@@ -1,6 +1,9 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
+    id("kotlin-parcelize")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -35,10 +38,29 @@ android {
 
 dependencies {
 
+    implementation(project(":core:common"))
+    implementation(project(":core:data"))
+    implementation(project(":core:domain"))
+
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.appcompat:appcompat:1.5.1")
     implementation("com.google.android.material:material:1.7.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    implementation(Dependency.Hilt.HILT)
+    kapt(Dependency.Hilt.HILT_KAPT)
+
+    implementation(Dependency.LifeCycle.VM)
+    implementation(Dependency.LifeCycle.EXTENSIONS)
+    implementation(Dependency.LifeCycle.LIVEDATA)
+
+    implementation(Dependency.Paging.PAGING)
+
+    implementation(Dependency.Glide.GLIDE)
+    implementation(Dependency.Glide.GLIDE_COMPILER)
+
+    implementation(Dependency.Nav.NAV_UI)
+    implementation(Dependency.Nav.NAV_FRAGMENT)
 }
