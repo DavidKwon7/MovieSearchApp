@@ -1,7 +1,5 @@
 package com.flow.domain.entity
 
-
-
 data class Item(
     //@SerializedName("actor") val actor: String?,
     //@SerializedName("director") val director: String?,
