@@ -64,6 +64,7 @@ dependencies {
     implementation(project(":core:domain"))
 
     implementation(project(":feature:search"))
+    implementation(project(":feature:searchlist"))
 
     implementation(Dependency.KTX.CORE)
     implementation(Dependency.AndroidX.APP_COMPAT)
