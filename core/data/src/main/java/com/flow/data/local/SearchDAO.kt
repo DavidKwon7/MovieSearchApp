@@ -4,14 +4,14 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.flow.data.model.SearchDataModel
+import com.flow.data.model.SearchEntityModel
 
 @Dao
 interface SearchDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertSearch(search: List<SearchDataModel>)
+    fun insertSearch(search: SearchEntityModel)
 
     @Query("SELECT * FROM searchDataModel")
-    fun getAllSearch(): List<SearchDataModel>
+    fun getAllSearch(): List<SearchEntityModel>
 }

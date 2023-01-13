@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 interface Repository {
     suspend fun searchMovie(query: String): Flow<PagingData<Item>>
 
-    suspend fun insertSearch(data: List<SearchEntityModel>)
+    suspend fun insertSearch(data: SearchEntityModel)
 
     fun getAllSearch(): Flow<List<SearchEntityModel>>
 }

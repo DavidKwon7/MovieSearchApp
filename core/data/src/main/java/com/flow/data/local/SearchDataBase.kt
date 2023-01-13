@@ -2,10 +2,10 @@ package com.flow.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.flow.data.model.SearchDataModel
+import com.flow.data.model.SearchEntityModel
 
 @Database(
-    entities = [SearchDataModel::class],
+    entities = [SearchEntityModel::class],
     version = 1
 )
 abstract class SearchDataBase : RoomDatabase() {

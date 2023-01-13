@@ -8,14 +8,19 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.flow.moviesearchapp.databinding.FragmentSearchBinding
 import com.flow.search.SearchAdapter
+import com.flow.search.SearchMovieState
 import com.flow.search.SearchState
 import com.flow.search.SearchViewModel
+import com.flow.search.model.SearchUiModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -52,8 +57,11 @@ class SearchFragment : Fragment() {
         }
 
         binding.btnSearchList.setOnClickListener {
+            val et = binding.etSearch.text.toString()
+            val data = SearchUiModel(null, et)
             val action = SearchFragmentDirections.actionSearchFragmentToSearchListFragment()
             findNavController().navigate(action.actionId)
+            searchViewModel.insertSearch(data)
         }
 
         observeMovieList()
@@ -71,17 +79,17 @@ class SearchFragment : Fragment() {
 
     private fun observeMovieList() {
         lifecycleScope.launch(Dispatchers.Main) {
-            searchViewModel.searchStateFlow.collect { state ->
+            searchViewModel.searchMovieStateFlow.collect { state ->
                 when(state) {
-                    is SearchState.Empty -> {
+                    is SearchMovieState.Empty -> {
                         Toast.makeText(requireContext(), "검색결과가 없습니다", Toast.LENGTH_SHORT).show()
                         // TODO 화면에 표시 해주기
                     }
-                    is SearchState.Loading -> {
+                    is SearchMovieState.Loading -> {
                         binding.pbSearch.isVisible = true
                         binding.rvSearch.isVisible = false
                     }
-                    is SearchState.Success -> {
+                    is SearchMovieState.Success -> {
                         binding.pbSearch.isVisible = false
                         binding.rvSearch.isVisible = true
                         state.data.collect {
@@ -89,7 +97,7 @@ class SearchFragment : Fragment() {
                             binding.rvSearch.adapter = searchAdapter
                         }
                     }
-                    is SearchState.Failed -> {
+                    is SearchMovieState.Failed -> {
                         Toast.makeText(requireContext(), "에러발생", Toast.LENGTH_SHORT).show()
                         // 에러 로그 찍어주기
                     }

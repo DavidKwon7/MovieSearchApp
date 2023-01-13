@@ -22,9 +22,9 @@ class RepositoryImpl @Inject constructor(
            return remote.searchMovie(query)
     }
 
-    override suspend fun insertSearch(data: List<SearchEntityModel>) {
+    override suspend fun insertSearch(data: SearchEntityModel) {
         return localDataSource.insertSearch(
-            searchDataDomainMapper.toList(data)
+            searchDataDomainMapper.to(data)
         )
     }
 

@@ -1,6 +1,8 @@
 package com.flow.moviesearchapp.di
 
 import com.flow.data.repository.RepositoryImpl
+import com.flow.data.source.LocalDataSource
+import com.flow.data.source.LocalDataSourceImpl
 import com.flow.domain.repository.Repository
 import dagger.Binds
 import dagger.Module
@@ -16,4 +18,8 @@ abstract class RepositoryModule {
         repositoryImpl: RepositoryImpl
     ): Repository
 
+    @Binds
+    abstract fun bindsLocalSource(
+        localDataSourceImpl: LocalDataSourceImpl
+    ): LocalDataSource
 }

@@ -1,10 +1,10 @@
 package com.flow.data.source
 
-import com.flow.data.model.SearchDataModel
+import com.flow.data.model.SearchEntityModel
 
 interface LocalDataSource {
 
-    suspend fun insertSearch(data: List<SearchDataModel>)
+    suspend fun insertSearch(data: SearchEntityModel)
 
-    fun getAllSearch(): List<SearchDataModel>
+    fun getAllSearch(): List<SearchEntityModel>
 }

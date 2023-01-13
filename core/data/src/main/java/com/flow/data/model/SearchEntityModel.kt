@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(
     tableName = "searchDataModel"
 )
-data class SearchDataModel(
+data class SearchEntityModel(
     @PrimaryKey(autoGenerate = true) val id: Int?,
     val title: String?
 )
