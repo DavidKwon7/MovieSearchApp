@@ -1,4 +1,4 @@
-package com.flow.search
+package com.flow.moviesearchapp
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,11 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.flow.search.databinding.FragmentSearchBinding
+import androidx.navigation.fragment.findNavController
+import com.flow.moviesearchapp.databinding.FragmentSearchBinding
+import com.flow.search.SearchAdapter
+import com.flow.search.SearchState
+import com.flow.search.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -46,6 +50,12 @@ class SearchFragment : Fragment() {
                 observeMovieList()
             }
         }
+
+        binding.btnSearchList.setOnClickListener {
+            val action = SearchFragmentDirections.actionSearchFragmentToSearchListFragment()
+            findNavController().navigate(action.actionId)
+        }
+
         observeMovieList()
     }
 
