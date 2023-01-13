@@ -7,7 +7,6 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.flow.data.model.MovieSearchEntityModel
 import com.flow.domain.entity.Item
 import com.flow.search.databinding.ItemSearchBinding
 

@@ -4,10 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.flow.data.model.MovieSearchEntityModel
 import com.flow.domain.entity.Item
 import com.flow.domain.usecase.SearchMovieUseCase
-import com.flow.search.mapper.MovieSearchUiDomainMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.*
@@ -17,7 +15,6 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val searchMovieUseCase: SearchMovieUseCase,
-    private val movieSearchUiDomainMapper: MovieSearchUiDomainMapper
 ) : ViewModel() {
 
     private var _searchStateFlow = MutableStateFlow<SearchState>(SearchState.Empty)
