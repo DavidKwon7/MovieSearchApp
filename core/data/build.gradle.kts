@@ -54,4 +54,8 @@ dependencies {
     implementation(Dependency.Remote.HTTP)
 
     implementation(Dependency.Paging.PAGING)
+
+    implementation(Dependency.Room.RUNTIME)
+    kapt(Dependency.Room.COMPILER)
+    implementation(Dependency.Room.ROOM_KTX)
 }
