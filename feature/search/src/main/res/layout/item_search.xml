@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-        <import type="com.flow.domain.entity.Item"/>
-            <variable
-                name="searchMovie"
-                type="com.flow.domain.entity.Item" />
-
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -34,7 +25,7 @@
             android:layout_marginEnd="20dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="@{searchMovie.title}"
+            android:text="제목"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -43,18 +34,25 @@
             tools:text="title" />
 
         <TextView
-            android:id="@+id/tv_description"
-            android:layout_width="0dp"
+            android:id="@+id/tv_user_rating"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:layout_marginTop="4dp"
             android:ellipsize="end"
             android:maxLines="4"
-            android:text="@{searchMovie.userRating}"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="유저 평점"
             app:layout_constraintStart_toEndOf="@id/iv_movie"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
             tools:text="description" />
+
+    <TextView
+        android:id="@+id/tv_pub_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/iv_movie"
+        app:layout_constraintTop_toBottomOf="@id/tv_user_rating"
+        android:text="발매일"/>
 
         <View
             android:layout_width="match_parent"
@@ -65,4 +63,4 @@
             android:layout_marginTop="12dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+
