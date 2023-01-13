@@ -63,6 +63,8 @@ dependencies {
     implementation(project(":core:data"))
     implementation(project(":core:domain"))
 
+    implementation(project(":feature:search"))
+
     implementation(Dependency.KTX.CORE)
     implementation(Dependency.AndroidX.APP_COMPAT)
     implementation(Dependency.AndroidX.MATERIAL)
