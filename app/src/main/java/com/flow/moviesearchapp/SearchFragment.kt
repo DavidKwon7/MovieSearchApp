@@ -1,6 +1,7 @@
 package com.flow.moviesearchapp
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.flow.moviesearchapp.databinding.FragmentSearchBinding
 import com.flow.search.SearchAdapter
 import com.flow.search.SearchMovieState
@@ -29,6 +31,9 @@ class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
     private val searchViewModel: SearchViewModel by viewModels()
+
+    val args: SearchFragmentArgs by navArgs()
+
     private val searchAdapter: SearchAdapter by lazy {
         SearchAdapter(
             itemClickListener = {
@@ -52,6 +57,12 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        Log.d("전송 확인", "onViewCreated: ${args.searchData?.title}")
+        val searchData = args.searchData?.title
+        if (searchData != null) {
+            searchMovie(searchData)
+        }
+
         initRecyclerView()
 
         binding.btnSearch.setOnClickListener {
@@ -64,6 +75,7 @@ class SearchFragment : Fragment() {
                 searchMovie(et)
                 observeMovieList()
             }
+
         }
 
         binding.btnSearchList.setOnClickListener {
