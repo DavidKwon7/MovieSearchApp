@@ -15,4 +15,4 @@ data class Item(
     val title: String?,
     //@SerializedName("userRating")
     val userRating: String?
-)
+) : java.io.Serializable

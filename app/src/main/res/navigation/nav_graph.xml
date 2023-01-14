@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_searchFragment_to_searchListFragment"
             app:destination="@id/searchListFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_webviewFragment"
+            app:destination="@id/webviewFragment" />
     </fragment>
 
     <fragment
@@ -28,5 +31,16 @@
         <action
             android:id="@+id/action_searchListFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/webviewFragment"
+        android:name="com.flow.moviesearchapp.WebviewFragment"
+        android:label="fragment_webview"
+        tools:layout="@layout/fragment_webview" >
+        <argument
+            android:name="webviewData"
+            app:argType="com.flow.domain.entity.Item"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>
