@@ -1,6 +1,5 @@
 package com.flow.searchlist
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -9,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.flow.searchlist.databinding.ItemSearchListBinding
 import com.flow.searchlist.model.SearchUiModel
 
-class SearchListAdapter(): ListAdapter<SearchUiModel, SearchListAdapter.SearchListViewHolder>(DIFF_COMPARATOR) {
+class SearchListAdapter(
+    private val itemClickListener: (SearchUiModel) -> Unit
+): ListAdapter<SearchUiModel, SearchListAdapter.SearchListViewHolder>(DIFF_COMPARATOR) {
 
     val data = mutableListOf<SearchUiModel>()
     val limit: Int = 10
@@ -18,9 +19,13 @@ class SearchListAdapter(): ListAdapter<SearchUiModel, SearchListAdapter.SearchLi
         private val binding: ItemSearchListBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(
-            item: SearchUiModel
+            item: SearchUiModel,
+            itemClickListener: (SearchUiModel) -> Unit
         ) {
             binding.tvSearch.text = item.title
+            binding.root.setOnClickListener {
+                itemClickListener.invoke(item)
+            }
         }
     }
 
@@ -32,7 +37,9 @@ class SearchListAdapter(): ListAdapter<SearchUiModel, SearchListAdapter.SearchLi
 
     override fun onBindViewHolder(holder: SearchListViewHolder, position: Int) {
         val item = getItem(position)
-        item?.let { holder.bind(it) }
+        item?.let {
+            holder.bind(it, itemClickListener)
+        }
     }
 
     /*@SuppressLint("NotifyDataSetChanged")
