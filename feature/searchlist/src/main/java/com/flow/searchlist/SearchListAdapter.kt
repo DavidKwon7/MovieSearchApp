@@ -12,9 +12,6 @@ class SearchListAdapter(
     private val itemClickListener: (SearchUiModel) -> Unit
 ): ListAdapter<SearchUiModel, SearchListAdapter.SearchListViewHolder>(DIFF_COMPARATOR) {
 
-    val data = mutableListOf<SearchUiModel>()
-    val limit: Int = 10
-
     inner class SearchListViewHolder(
         private val binding: ItemSearchListBinding
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -42,19 +39,10 @@ class SearchListAdapter(
         }
     }
 
-    // 테스트
     override fun submitList(list: List<SearchUiModel>?) {
         if (list?.size?: 0 > 10) super.submitList(list?.takeLast(10))
         else super.submitList(list)
     }
-
-    /*@SuppressLint("NotifyDataSetChanged")
-    fun deleteData() {
-        if (data.size > 11) {
-            data.removeAt(0)
-            notifyDataSetChanged()
-        }
-    }*/
 
     companion object {
         private val DIFF_COMPARATOR = object : DiffUtil.ItemCallback<SearchUiModel>() {

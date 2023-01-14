@@ -30,9 +30,6 @@ class SearchListFragment : Fragment() {
     private val searchListAdapter: SearchListAdapter by lazy {
         SearchListAdapter(
             itemClickListener = {
-                Toast.makeText(requireContext(), "클릭", Toast.LENGTH_SHORT).show()
-                //val action = SearchListFragmentDirections.actionSearchListFragmentToSearchFragment()
-                //findNavController().navigate(action.actionId)
                 navigateWithArgs(
                     SearchListFragmentDirections.actionSearchListFragmentToSearchFragment(
                         it,
@@ -41,8 +38,6 @@ class SearchListFragment : Fragment() {
             }
         )
     }
-
-    private val data = mutableListOf<SearchUiModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,8 +58,6 @@ class SearchListFragment : Fragment() {
         observeRecentSearch()
         searchListViewModel.getAllSearch()
 
-
-        //searchListAdapter.deleteData()
     }
 
     private fun initRecyclerView() {
@@ -73,22 +66,11 @@ class SearchListFragment : Fragment() {
         }
     }
 
-    /*@SuppressLint("NotifyDataSetChanged")
-    private fun deleteData() {
-        if (data.size > 11) {
-            data.removeAt(0)
-            searchListAdapter.notifyDataSetChanged()
-        }
-    }*/
-
-
-
-    @SuppressLint("NotifyDataSetChanged")
     private fun observeRecentSearch() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 searchListViewModel.searchStateFlow.collectLatest { state ->
-                    when(state) {
+                    when (state) {
                         is SearchState.Empty -> {
 
                         }
@@ -98,8 +80,6 @@ class SearchListFragment : Fragment() {
                         is SearchState.Success -> {
                             binding.pbSearch.isVisible = false
                             val data = state.data
-                            /*//searchListAdapter.notifyDataSetChanged()
-                            searchListAdapter.notifyItemChanged(searchListAdapter.itemCount -1 ,data)*/
                             searchListAdapter.submitList(data)
                         }
                         is SearchState.Failed -> {

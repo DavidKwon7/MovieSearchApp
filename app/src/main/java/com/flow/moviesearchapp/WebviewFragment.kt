@@ -1,5 +1,6 @@
 package com.flow.moviesearchapp
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,11 +29,9 @@ class WebviewFragment : Fragment() {
         return view
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // Log.d("데이터 전송 테스트", "onViewCreated: ${args.webviewData?.link}")
-        // Toast.makeText(requireContext(), "${args.webviewData?.link}", Toast.LENGTH_SHORT).show()
 
         val url = args.webviewData?.link
         binding.webview.settings.apply {

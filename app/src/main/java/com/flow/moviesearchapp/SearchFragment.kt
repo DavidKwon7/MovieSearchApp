@@ -20,6 +20,7 @@ import com.flow.search.model.SearchUiModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
@@ -58,7 +59,6 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.d("전송 확인", "onViewCreated: ${args.searchData?.title}")
         val searchData = args.searchData?.title
         if (searchData != null) {
             searchMovie(searchData)
@@ -80,11 +80,8 @@ class SearchFragment : Fragment() {
         }
 
         binding.btnSearchList.setOnClickListener {
-            // val et = binding.etSearch.text.toString()
-            //val data = SearchUiModel(null, et)
             val action = SearchFragmentDirections.actionSearchFragmentToSearchListFragment()
             findNavController().navigate(action.actionId)
-            //searchViewModel.insertSearch(data)
         }
 
         observeMovieList()
