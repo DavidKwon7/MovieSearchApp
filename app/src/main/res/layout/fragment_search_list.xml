@@ -18,6 +18,8 @@
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_marginTop="20dp"
+        app:reverseLayout="true"
+        app:stackFromEnd="true"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <ProgressBar

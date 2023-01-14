@@ -31,10 +31,7 @@ class SearchListAdapter(): ListAdapter<SearchUiModel, SearchListAdapter.SearchLi
         val item = getItem(position)
         item?.let { holder.bind(it) }
     }
-
-    /*override fun getItemCount(): Int {
-        return 10
-    }*/
+    
 
     companion object {
         private val DIFF_COMPARATOR = object : DiffUtil.ItemCallback<SearchUiModel>() {
