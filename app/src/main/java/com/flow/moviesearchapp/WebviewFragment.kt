@@ -33,6 +33,10 @@ class WebviewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        connectWebview()
+    }
+
+    private fun connectWebview() {
         val url = args.webviewData?.link
         binding.webview.settings.apply {
             javaScriptEnabled = true
@@ -47,6 +51,7 @@ class WebviewFragment : Fragment() {
             }
         }
     }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

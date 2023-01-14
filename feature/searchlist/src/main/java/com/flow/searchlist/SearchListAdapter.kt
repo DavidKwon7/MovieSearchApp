@@ -10,7 +10,7 @@ import com.flow.searchlist.model.SearchUiModel
 
 class SearchListAdapter(
     private val itemClickListener: (SearchUiModel) -> Unit
-): ListAdapter<SearchUiModel, SearchListAdapter.SearchListViewHolder>(DIFF_COMPARATOR) {
+) : ListAdapter<SearchUiModel, SearchListAdapter.SearchListViewHolder>(DIFF_COMPARATOR) {
 
     inner class SearchListViewHolder(
         private val binding: ItemSearchListBinding
@@ -40,7 +40,7 @@ class SearchListAdapter(
     }
 
     override fun submitList(list: List<SearchUiModel>?) {
-        if (list?.size?: 0 > 10) super.submitList(list?.takeLast(10))
+        if ((list?.size ?: 0) > 10) super.submitList(list?.takeLast(10))
         else super.submitList(list)
     }
 
@@ -56,7 +56,6 @@ class SearchListAdapter(
             ): Boolean {
                 return oldItem == newItem
             }
-
         }
     }
 }

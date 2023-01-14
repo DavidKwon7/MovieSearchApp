@@ -20,6 +20,7 @@ import com.flow.searchlist.model.SearchUiModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @AndroidEntryPoint
 class SearchListFragment : Fragment() {
@@ -72,18 +73,29 @@ class SearchListFragment : Fragment() {
                 searchListViewModel.searchStateFlow.collectLatest { state ->
                     when (state) {
                         is SearchState.Empty -> {
-
+                            binding.ivEmpty.isVisible = true
+                            binding.tvEmpty.isVisible = true
+                            binding.pbSearch.isVisible = false
+                            binding.rvSearchList.isVisible = false
                         }
                         is SearchState.Loading -> {
+                            binding.ivEmpty.isVisible = false
+                            binding.tvEmpty.isVisible = false
                             binding.pbSearch.isVisible = true
+                            binding.rvSearchList.isVisible = false
                         }
                         is SearchState.Success -> {
+                            binding.ivEmpty.isVisible = false
+                            binding.tvEmpty.isVisible = false
                             binding.pbSearch.isVisible = false
+                            binding.rvSearchList.isVisible = true
+
                             val data = state.data
                             searchListAdapter.submitList(data)
                         }
                         is SearchState.Failed -> {
-
+                            Timber.e("에러 발생: ${state.message}")
+                            state.message.printStackTrace()
                         }
 
                     }
@@ -91,6 +103,7 @@ class SearchListFragment : Fragment() {
             }
         }
     }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

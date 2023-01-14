@@ -1,34 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".SearchListFragment">
 
     <TextView
         android:id="@+id/tv_head"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="최신 검색 목록" />
+        android:text="@string/recent_search_list" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_search_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_marginTop="20dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toTopOf="parent"
         app:reverseLayout="true"
-        app:stackFromEnd="true"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:stackFromEnd="true" />
+
+    <ImageView
+        android:id="@+id/iv_empty"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:contentDescription="@string/empty"
+        android:src="@drawable/ic_baseline_mood_bad_24"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/empty_screen"
+        android:textColor="#E30D0D"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_empty" />
 
     <ProgressBar
         android:id="@+id/pbSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

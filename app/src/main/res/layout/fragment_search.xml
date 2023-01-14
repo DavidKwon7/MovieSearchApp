@@ -12,16 +12,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
-        android:hint="검색어를 입력해주세요"
-        app:layout_constraintTop_toTopOf="parent"
+        android:hint="@string/write"
+        app:layout_constraintEnd_toStartOf="@id/btn_search"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btn_search"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="검색"
+        android:text="@string/search"
         app:layout_constraintEnd_toStartOf="@id/btn_search_list"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,7 +29,7 @@
         android:id="@+id/btn_search_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="최근 검색"
+        android:text="@string/recent_search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,6 +40,31 @@
         android:layout_marginTop="12dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/et_search" />
+
+    <ImageView
+        android:id="@+id/iv_empty"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:contentDescription="@string/empty"
+        android:src="@drawable/ic_baseline_mood_bad_24"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/empty_screen"
+        android:textColor="#E30D0D"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_empty" />
 
     <ProgressBar
         android:id="@+id/pb_search"

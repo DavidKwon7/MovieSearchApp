@@ -44,8 +44,8 @@ class SearchListViewModel @Inject constructor(
 }
 
 sealed class SearchState() {
-    object Empty: SearchState()
-    object Loading: SearchState()
+    object Empty : SearchState()
+    object Loading : SearchState()
     class Success(var data: List<SearchUiModel>) : SearchState()
     class Failed(var message: Throwable) : SearchState()
 }

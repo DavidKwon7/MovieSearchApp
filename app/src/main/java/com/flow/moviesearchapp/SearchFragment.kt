@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -19,6 +18,7 @@ import com.flow.search.model.SearchUiModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
@@ -32,7 +32,6 @@ class SearchFragment : Fragment() {
     private val searchAdapter: SearchAdapter by lazy {
         SearchAdapter(
             itemClickListener = {
-                Toast.makeText(requireContext(), "Click!", Toast.LENGTH_SHORT).show()
                 navigateWithArgs(
                     SearchFragmentDirections.actionSearchFragmentToWebviewFragment(
                         it
@@ -57,13 +56,14 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val searchData = args.searchData?.title
-        if (searchData != null) {
-            searchMovie(searchData)
-        }
-
         initRecyclerView()
+        clickSearch()
+        clickSearchList()
+        searchArgs()
+        observeMovieList()
+    }
 
+    private fun clickSearch() {
         binding.btnSearch.setOnClickListener {
 
             val et = binding.etSearch.text.toString()
@@ -74,15 +74,14 @@ class SearchFragment : Fragment() {
                 searchMovie(et)
                 observeMovieList()
             }
-
         }
+    }
 
+    private fun clickSearchList() {
         binding.btnSearchList.setOnClickListener {
             val action = SearchFragmentDirections.actionSearchFragmentToSearchListFragment()
             findNavController().navigate(action.actionId)
         }
-
-        observeMovieList()
     }
 
     private fun initRecyclerView() {
@@ -95,29 +94,43 @@ class SearchFragment : Fragment() {
         searchViewModel.searchMovie(queue)
     }
 
+    private fun searchArgs() {
+        val searchData = args.searchData?.title
+        if (searchData != null) {
+            searchMovie(searchData)
+        }
+    }
+
     private fun observeMovieList() {
         lifecycleScope.launch(Dispatchers.Main) {
             searchViewModel.searchMovieStateFlow.collect { state ->
-                when(state) {
+                when (state) {
                     is SearchMovieState.Empty -> {
-                        Toast.makeText(requireContext(), "검색결과가 없습니다", Toast.LENGTH_SHORT).show()
-                        // TODO 화면에 표시 해주기
+                        binding.ivEmpty.isVisible = true
+                        binding.tvEmpty.isVisible = true
+                        binding.pbSearch.isVisible = false
+                        binding.rvSearch.isVisible = false
                     }
                     is SearchMovieState.Loading -> {
+                        binding.ivEmpty.isVisible = false
+                        binding.tvEmpty.isVisible = false
                         binding.pbSearch.isVisible = true
                         binding.rvSearch.isVisible = false
                     }
                     is SearchMovieState.Success -> {
+                        binding.ivEmpty.isVisible = false
+                        binding.tvEmpty.isVisible = false
                         binding.pbSearch.isVisible = false
                         binding.rvSearch.isVisible = true
+
                         state.data.collect {
                             searchAdapter.submitData(viewLifecycleOwner.lifecycle, it)
                             binding.rvSearch.adapter = searchAdapter
                         }
                     }
                     is SearchMovieState.Failed -> {
-                        Toast.makeText(requireContext(), "에러발생", Toast.LENGTH_SHORT).show()
-                        // 에러 로그 찍어주기
+                        Timber.e("에러 발생: ${state.message}")
+                        state.message.printStackTrace()
                     }
                 }
             }
