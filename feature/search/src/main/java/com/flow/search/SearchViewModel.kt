@@ -5,8 +5,13 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.flow.domain.entity.Item
+import com.flow.domain.usecase.GetAllSearchUseCase
+import com.flow.domain.usecase.InsertSearchUseCase
 import com.flow.domain.usecase.SearchMovieUseCase
+import com.flow.search.mapper.SearchUiDomainMapper
+import com.flow.search.model.SearchUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -15,23 +20,36 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val searchMovieUseCase: SearchMovieUseCase,
+    private val insertSearchUseCase: InsertSearchUseCase,
+    private val searchUiDomainMapper: SearchUiDomainMapper
 ) : ViewModel() {
+
+    private var _searchMovieStateFlow = MutableStateFlow<SearchMovieState>(SearchMovieState.Empty)
+    val searchMovieStateFlow: StateFlow<SearchMovieState> get() = _searchMovieStateFlow
 
     private var _searchStateFlow = MutableStateFlow<SearchState>(SearchState.Empty)
     val searchStateFlow: StateFlow<SearchState> get() = _searchStateFlow
 
     fun searchMovie(query: String) =
         viewModelScope.launch {
-            _searchStateFlow.value = SearchState.Loading
+            _searchMovieStateFlow.value = SearchMovieState.Loading
             searchMovieUseCase.invoke(query)
                 .cachedIn(viewModelScope)
                 .catch { e ->
-                    _searchStateFlow.value = SearchState.Failed(e)
+                    _searchMovieStateFlow.value = SearchMovieState.Failed(e)
                 }.collect { searchData ->
-                    _searchStateFlow.value = SearchState.Success(
+                    _searchMovieStateFlow.value = SearchMovieState.Success(
                         flowOf((searchData))
                     )
                 }
+        }
+
+    fun insertSearch(search: SearchUiModel) =
+        viewModelScope.launch(Dispatchers.IO) {
+            val insertData = searchUiDomainMapper.from(search)
+            _searchStateFlow.value = SearchState.Loading
+            insertSearchUseCase.invoke(insertData)
+
         }
 
     override fun onCleared() {
@@ -41,10 +59,17 @@ class SearchViewModel @Inject constructor(
 }
 
 
+sealed class SearchMovieState() {
+    object Empty: SearchMovieState()
+    object Loading: SearchMovieState()
+    class Success(var data: Flow<PagingData<Item>>) : SearchMovieState()
+    class Failed(var message: Throwable) : SearchMovieState()
+}
+
 sealed class SearchState() {
     object Empty: SearchState()
     object Loading: SearchState()
-    class Success(var data: Flow<PagingData<Item>>) : SearchState()
+    class Success(var data: List<com.flow.searchlist.model.SearchUiModel>) : SearchState()
     class Failed(var message: Throwable) : SearchState()
 }
 

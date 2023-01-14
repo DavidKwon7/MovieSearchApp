@@ -11,25 +11,30 @@ import com.flow.domain.entity.Item
 import com.flow.search.databinding.ItemSearchBinding
 
 class SearchAdapter(
-
-): PagingDataAdapter<Item, SearchAdapter.SearchMovieViewHolder>(DIFF_CALLBACK) {
+    private val itemClickListener: (Item) -> Unit
+) : PagingDataAdapter<Item, SearchAdapter.SearchMovieViewHolder>(DIFF_CALLBACK) {
 
     inner class SearchMovieViewHolder(
         private val binding: ItemSearchBinding
-    ): RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Item) = binding.apply {
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: Item, itemClickListener: (Item) -> Unit) =
 
-            Glide.with(root).load(item.image).into(ivMovie)
-            tvTitle.text = stripHtml(item.title)
-            tvUserRating.text = item.userRating
-            tvPubDate.text = item.pubDate
-        }
+            binding.apply {
+                Glide.with(root).load(item.image).into(ivMovie)
+                tvTitle.text = stripHtml(item.title)
+                tvUserRating.text = item.userRating
+                tvPubDate.text = item.pubDate
+
+                binding.root.setOnClickListener {
+                    itemClickListener.invoke(item)
+                }
+            }
     }
 
     override fun onBindViewHolder(holder: SearchMovieViewHolder, position: Int) {
         val item = getItem(position)
         item?.let {
-            holder.bind(it)
+            holder.bind(it, itemClickListener)
         }
     }
 
