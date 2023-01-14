@@ -1,9 +1,5 @@
 package com.flow.common
 
-import androidx.paging.PagingData
-import androidx.paging.map
-import kotlinx.coroutines.flow.Flow
-
 interface Mapper<I, O> {
 
     fun from(i: I?): O

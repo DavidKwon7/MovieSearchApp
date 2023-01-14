@@ -1,16 +1,13 @@
 package com.flow.moviesearchapp
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import com.flow.moviesearchapp.databinding.FragmentSearchBinding
 import com.flow.moviesearchapp.databinding.FragmentWebviewBinding
 
 class WebviewFragment : Fragment() {

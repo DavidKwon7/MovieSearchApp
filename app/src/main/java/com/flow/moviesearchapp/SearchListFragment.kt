@@ -12,9 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
 import com.flow.moviesearchapp.databinding.FragmentSearchListBinding
-import com.flow.search.SearchViewModel
 import com.flow.searchlist.SearchListAdapter
 import com.flow.searchlist.SearchListViewModel
 import com.flow.searchlist.SearchState

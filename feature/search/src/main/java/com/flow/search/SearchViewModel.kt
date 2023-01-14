@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.flow.domain.entity.Item
-import com.flow.domain.usecase.GetAllSearchUseCase
 import com.flow.domain.usecase.InsertSearchUseCase
 import com.flow.domain.usecase.SearchMovieUseCase
 import com.flow.search.mapper.SearchUiDomainMapper
