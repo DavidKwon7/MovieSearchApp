@@ -42,6 +42,12 @@ class SearchListAdapter(
         }
     }
 
+    // 테스트
+    override fun submitList(list: List<SearchUiModel>?) {
+        if (list?.size?: 0 > 10) super.submitList(list?.takeLast(10))
+        else super.submitList(list)
+    }
+
     /*@SuppressLint("NotifyDataSetChanged")
     fun deleteData() {
         if (data.size > 11) {
