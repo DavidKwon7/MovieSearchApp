@@ -26,9 +26,6 @@ class SearchViewModel @Inject constructor(
     private var _searchMovieStateFlow = MutableStateFlow<SearchMovieState>(SearchMovieState.Empty)
     val searchMovieStateFlow: StateFlow<SearchMovieState> get() = _searchMovieStateFlow
 
-    private var _searchStateFlow = MutableStateFlow<SearchState>(SearchState.Empty)
-    val searchStateFlow: StateFlow<SearchState> get() = _searchStateFlow
-
     fun searchMovie(query: String) =
         viewModelScope.launch {
             _searchMovieStateFlow.value = SearchMovieState.Loading
@@ -46,7 +43,6 @@ class SearchViewModel @Inject constructor(
     fun insertSearch(search: SearchUiModel) =
         viewModelScope.launch(Dispatchers.IO) {
             val insertData = searchUiDomainMapper.from(search)
-            _searchStateFlow.value = SearchState.Loading
             insertSearchUseCase.invoke(insertData)
 
         }
@@ -64,11 +60,3 @@ sealed class SearchMovieState() {
     class Success(var data: Flow<PagingData<Item>>) : SearchMovieState()
     class Failed(var message: Throwable) : SearchMovieState()
 }
-
-sealed class SearchState() {
-    object Empty: SearchState()
-    object Loading: SearchState()
-    class Success(var data: List<com.flow.searchlist.model.SearchUiModel>) : SearchState()
-    class Failed(var message: Throwable) : SearchState()
-}
-
