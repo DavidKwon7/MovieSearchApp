@@ -39,7 +39,9 @@ class SearchFragment : Fragment() {
             itemClickListener = {
                 Toast.makeText(requireContext(), "Click!", Toast.LENGTH_SHORT).show()
                 navigateWithArgs(
-                    SearchFragmentDirections.actionSearchFragmentToWebviewFragment()
+                    SearchFragmentDirections.actionSearchFragmentToWebviewFragment(
+                        it
+                    )
                 )
             }
         )

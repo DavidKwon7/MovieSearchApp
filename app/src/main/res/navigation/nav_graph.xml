@@ -37,6 +37,10 @@
         android:name="com.flow.moviesearchapp.WebviewFragment"
         android:label="fragment_webview"
         tools:layout="@layout/fragment_webview" >
-
+        <argument
+            android:name="webviewData"
+            app:argType="com.flow.domain.entity.Item"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>
