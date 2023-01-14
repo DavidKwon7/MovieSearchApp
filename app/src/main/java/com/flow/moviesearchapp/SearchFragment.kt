@@ -29,7 +29,13 @@ class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
     private val searchViewModel: SearchViewModel by viewModels()
-    private val searchAdapter: SearchAdapter by lazy { SearchAdapter() }
+    private val searchAdapter: SearchAdapter by lazy {
+        SearchAdapter(
+            itemClickListener = {
+                Toast.makeText(requireContext(), "Click!", Toast.LENGTH_SHORT).show()
+            }
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
