@@ -16,6 +16,7 @@ import com.flow.search.SearchViewModel
 import com.flow.searchlist.SearchListAdapter
 import com.flow.searchlist.SearchListViewModel
 import com.flow.searchlist.SearchState
+import com.flow.searchlist.model.SearchUiModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -29,6 +30,8 @@ class SearchListFragment : Fragment() {
     private val searchListAdapter: SearchListAdapter by lazy {
         SearchListAdapter()
     }
+
+    private val data = mutableListOf<SearchUiModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,6 +51,9 @@ class SearchListFragment : Fragment() {
         initRecyclerView()
         observeRecentSearch()
         searchListViewModel.getAllSearch()
+
+
+        //searchListAdapter.deleteData()
     }
 
     private fun initRecyclerView() {
@@ -55,6 +61,16 @@ class SearchListFragment : Fragment() {
             adapter = searchListAdapter
         }
     }
+
+    /*@SuppressLint("NotifyDataSetChanged")
+    private fun deleteData() {
+        if (data.size > 11) {
+            data.removeAt(0)
+            searchListAdapter.notifyDataSetChanged()
+        }
+    }*/
+
+
 
     @SuppressLint("NotifyDataSetChanged")
     private fun observeRecentSearch() {

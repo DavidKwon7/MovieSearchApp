@@ -49,7 +49,11 @@ class SearchFragment : Fragment() {
         initRecyclerView()
 
         binding.btnSearch.setOnClickListener {
+
             val et = binding.etSearch.text.toString()
+            val data = SearchUiModel(null, et)
+            searchViewModel.insertSearch(data)
+
             lifecycleScope.launch(Dispatchers.Main) {
                 searchMovie(et)
                 observeMovieList()
@@ -57,11 +61,11 @@ class SearchFragment : Fragment() {
         }
 
         binding.btnSearchList.setOnClickListener {
-            val et = binding.etSearch.text.toString()
-            val data = SearchUiModel(null, et)
+            // val et = binding.etSearch.text.toString()
+            //val data = SearchUiModel(null, et)
             val action = SearchFragmentDirections.actionSearchFragmentToSearchListFragment()
             findNavController().navigate(action.actionId)
-            searchViewModel.insertSearch(data)
+            //searchViewModel.insertSearch(data)
         }
 
         observeMovieList()
