@@ -21,6 +21,7 @@ object Dependency {
         const val MOCKITO = "org.mockito:mockito-inline:3.4.0"
         const val CORE_TEST = "android.arch.core:core-testing:1.1.1"
         const val MOCKK = "io.mockk:mockk:1.12.4"
+        const val TURBINE = "app.cash.turbine:turbine:0.12.1"
     }
 
     object AndroidTest {

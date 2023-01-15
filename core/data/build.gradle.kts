@@ -39,15 +39,21 @@ dependencies {
     implementation(project(":core:common"))
     implementation(project(":core:domain"))
 
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.5.1")
-    implementation("com.google.android.material:material:1.7.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.4")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
+    implementation(Dependency.KTX.CORE)
+    implementation(Dependency.AndroidX.APP_COMPAT)
+    implementation(Dependency.AndroidX.MATERIAL)
+    testImplementation(Dependency.Test.JUNIT)
+    androidTestImplementation(Dependency.AndroidTest.TEST_RUNNER)
+    androidTestImplementation(Dependency.AndroidTest.ESPRESSO_CORE)
 
     implementation(Dependency.Hilt.HILT)
 
+    testImplementation(Dependency.Test.TRUTH)
+    testImplementation(Dependency.Test.MOCKITO)
+    testImplementation(Dependency.Test.CORE_TEST)
+    testImplementation(Dependency.Test.MOCKK)
+    testImplementation(Dependency.Test.TURBINE)
+    testImplementation(Dependency.Coroutine.TEST)
 
     implementation(Dependency.Remote.RETROFIT)
     implementation(Dependency.Remote.CONVERTER)

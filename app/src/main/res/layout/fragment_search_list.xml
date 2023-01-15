@@ -10,7 +10,8 @@
         android:id="@+id/tv_head"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/recent_search_list" />
+        android:text="@string/recent_search_list"
+        android:textColor="@color/design_default_color_primary"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_search_list"

@@ -8,6 +8,15 @@
         android:id="@+id/tv_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/movie_title"
+        android:textSize="32sp"
+        android:layout_margin="20dp"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
