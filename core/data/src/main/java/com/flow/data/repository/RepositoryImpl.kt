@@ -15,7 +15,6 @@ import javax.inject.Inject
 class RepositoryImpl @Inject constructor(
     private val remote: Remote,
     private val localDataSource: LocalDataSource,
-    private val movieSearchDataDomainMapper: MovieSearchDataDomainMapper,
     private val searchDataDomainMapper: SearchDataDomainMapper
 ) : Repository {
     override suspend fun searchMovie(query: String): Flow<PagingData<Item>> {

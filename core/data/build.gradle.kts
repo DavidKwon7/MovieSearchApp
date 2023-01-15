@@ -52,6 +52,7 @@ dependencies {
     testImplementation(Dependency.Test.MOCKITO)
     testImplementation(Dependency.Test.CORE_TEST)
     testImplementation(Dependency.Test.MOCKK)
+    testImplementation(Dependency.Test.TURBINE)
     testImplementation(Dependency.Coroutine.TEST)
 
     implementation(Dependency.Remote.RETROFIT)
